@@ -6,5 +6,4 @@ public interface IEstudianteServi {
 
 public  Estudiante buscarPorId(Integer id);
 
-
 }

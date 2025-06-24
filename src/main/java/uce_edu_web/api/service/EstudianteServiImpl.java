@@ -16,8 +16,4 @@ public class EstudianteServiImpl implements IEstudianteServi {
         return this.estudianteRepo.seleccionarPorId(id);
     }
 
-   
-
-
-    
 }
