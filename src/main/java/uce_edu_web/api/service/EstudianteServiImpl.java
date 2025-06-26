@@ -1,5 +1,7 @@
 package uce_edu_web.api.service;
 
+import java.util.List;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import uce_edu_web.api.repository.IEstudianteRepo;
@@ -14,6 +16,31 @@ public class EstudianteServiImpl implements IEstudianteServi {
     @Override
     public Estudiante buscarPorId(Integer id) {
         return this.estudianteRepo.seleccionarPorId(id);
+    }
+
+    @Override
+    public List<Estudiante> buscarTodos() {
+        return this.estudianteRepo.seleccionarTodos();
+    }
+
+    @Override
+    public Estudiante guardar(Estudiante estudiante) {
+        return this.estudianteRepo.insertar(estudiante);
+    }
+
+    @Override
+    public Estudiante actualizar(Estudiante estudiante) {
+        return this.estudianteRepo.actualizar(estudiante);
+    }
+
+    @Override
+    public void borrarPorId(Integer id) {
+        this.estudianteRepo.eliminarPorId(id);
+    }
+
+    @Override
+    public Estudiante actualizarParcial(Estudiante estudiante) {
+        return this.estudianteRepo.actualizarParcial(estudiante);
     }
 
 }
