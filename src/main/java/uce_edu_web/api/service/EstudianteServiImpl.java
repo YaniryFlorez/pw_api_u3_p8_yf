@@ -29,8 +29,8 @@ public class EstudianteServiImpl implements IEstudianteServi {
     }
 
     @Override
-    public Estudiante actualizar(Estudiante estudiante) {
-        return this.estudianteRepo.actualizar(estudiante);
+    public void actualizarPorId(Estudiante estudiante) {
+         this.estudianteRepo.actualizarPorId(estudiante);
     }
 
     @Override
@@ -39,8 +39,10 @@ public class EstudianteServiImpl implements IEstudianteServi {
     }
 
     @Override
-    public Estudiante actualizarParcial(Estudiante estudiante) {
-        return this.estudianteRepo.actualizarParcial(estudiante);
+    public void actualizarParcial(Estudiante estudiante) {
+       this.estudianteRepo.actualizarParcial(estudiante);
     }
+
+
 
 }

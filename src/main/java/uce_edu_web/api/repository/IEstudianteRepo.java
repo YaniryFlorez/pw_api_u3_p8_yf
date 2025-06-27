@@ -9,7 +9,7 @@ public interface IEstudianteRepo {
 public Estudiante seleccionarPorId(Integer id);
 public List<Estudiante> seleccionarTodos();
 public Estudiante insertar(Estudiante estudiante);
-public Estudiante actualizar(Estudiante estudiante);
+public void actualizarPorId(Estudiante estudiante);
+public void actualizarParcial(Estudiante estudiante);
 public void eliminarPorId(Integer id);  
-public Estudiante actualizarParcial(Estudiante estudiante);
 }

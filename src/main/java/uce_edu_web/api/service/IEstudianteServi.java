@@ -9,8 +9,8 @@ public interface IEstudianteServi {
 public  Estudiante buscarPorId(Integer id);
 public List<Estudiante> buscarTodos();
 public Estudiante guardar(Estudiante estudiante);
-public Estudiante actualizar(Estudiante estudiante);
+public void actualizarPorId(Estudiante estudiante);
 public void borrarPorId(Integer id);  
-public Estudiante actualizarParcial(Estudiante estudiante);
+public void actualizarParcial(Estudiante estudiante);
 
 }

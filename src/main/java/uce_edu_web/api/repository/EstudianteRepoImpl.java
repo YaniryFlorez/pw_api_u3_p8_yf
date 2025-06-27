@@ -6,6 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.transaction.Transactional;
 import uce_edu_web.api.repository.modelo.Estudiante;
 
@@ -36,13 +37,6 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
         return estudiante;
     }
 
-
-    @Override
-    public Estudiante actualizar(Estudiante estudiante) {
-        return this.entityManager.merge(estudiante);
-    }
-
-
     @Override
     public void eliminarPorId(Integer id) {
         Estudiante estudiante = this.entityManager.find(Estudiante.class, id);
@@ -51,12 +45,15 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
         }
     }
 
+ @Override
+    public void actualizarPorId(Estudiante estudiante) {
+        this.entityManager.merge(estudiante);
 
-    @Override
-    public Estudiante actualizarParcial(Estudiante estudiante) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarParcial'");
     }
 
-    
+    @Override
+    public void actualizarParcial(Estudiante estudiante) {
+        this.entityManager.merge(estudiante);
+    }
+
 }
