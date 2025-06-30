@@ -7,7 +7,7 @@ public interface IProfesorServi {
 public  Profesor buscarPorId(Integer id);
 public List<Profesor> buscarTodos();
 public Profesor guardar(Profesor profesor);
-public Profesor actualizar(Profesor profesor);
+public void actualizar(Profesor profesor);
 public void borrarPorId(Integer id);  
-public Profesor actualizarParcial(Profesor profesor);
+public void actualizarParcial(Profesor profesor);
 }

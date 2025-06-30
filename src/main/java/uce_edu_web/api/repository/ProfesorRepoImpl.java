@@ -14,48 +14,42 @@ import uce_edu_web.api.repository.modelo.Profesor;
 public class ProfesorRepoImpl implements IProfesorRepo {
 
     @PersistenceContext
-    private  EntityManager entityManager;
-   
+    private EntityManager entityManager;
 
     @Override
     public Profesor seleccionarPorId(Integer id) {
         return this.entityManager.find(Profesor.class, id);
     }
 
-
     @Override
     public List<Profesor> seleccionarTodos() {
-    TypedQuery<Profesor> myquery = this.entityManager.createQuery("SELECT p FROM Profesor p", Profesor.class);
+        TypedQuery<Profesor> myquery = this.entityManager.createQuery("SELECT p FROM Profesor p", Profesor.class);
         return myquery.getResultList();
     }
 
-
     @Override
     public Profesor insertar(Profesor profesor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertar'");
+        this.entityManager.persist(profesor);
+        return profesor;
     }
-
 
     @Override
-    public Profesor actualizar(Profesor profesor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
-    }
+    public void actualizar(Profesor profesor) {
+        this.entityManager.merge(profesor);
 
+    }
 
     @Override
     public void eliminarPorId(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminarPorId'");
+        Profesor profesor = this.entityManager.find(Profesor.class, id);
+        if (profesor != null) {
+            this.entityManager.remove(profesor);
+        }
     }
-
 
     @Override
-    public Profesor actualizarParcial(Profesor profesor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarParcial'");
+    public void actualizarParcial(Profesor profesor) {
+        this.entityManager.merge(profesor);
     }
 
-    
 }

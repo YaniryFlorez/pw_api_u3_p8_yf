@@ -25,27 +25,22 @@ public class ProfesorServiImpl implements IProfesorServi {
 
     @Override
     public Profesor guardar(Profesor profesor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'guardar'");
+        return this.profesorRepo.insertar(profesor);
     }
 
     @Override
-    public Profesor actualizar(Profesor profesor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+    public void actualizar(Profesor profesor) {
+        this.profesorRepo.actualizar(profesor);
     }
 
     @Override
     public void borrarPorId(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'borrarPorId'");
+        this.profesorRepo.eliminarPorId(id);
     }
 
     @Override
-    public Profesor actualizarParcial(Profesor profesor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarParcial'");
+    public void actualizarParcial(Profesor profesor) {
+        this.profesorRepo.actualizarParcial(profesor);
     }
 
 }
-

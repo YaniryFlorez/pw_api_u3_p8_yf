@@ -70,5 +70,5 @@ public class EstudianteController {
     public void borrarPorId(@PathParam("id") Integer id) {
         this.estudianteService.borrarPorId(id);
     }
-
+   
 }

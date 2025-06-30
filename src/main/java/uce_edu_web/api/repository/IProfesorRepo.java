@@ -8,8 +8,8 @@ public interface IProfesorRepo {
 public  Profesor seleccionarPorId(Integer id);
 public List<Profesor> seleccionarTodos();
 public Profesor insertar(Profesor profesor);
-public Profesor actualizar(Profesor profesor);
+public void actualizar(Profesor profesor);
 public void eliminarPorId(Integer id);  
-public Profesor actualizarParcial(Profesor profesor);
+public void actualizarParcial(Profesor profesor);
 
 }
