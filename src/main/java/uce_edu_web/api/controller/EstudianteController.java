@@ -2,6 +2,7 @@ package uce_edu_web.api.controller;
 
 import java.util.List;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import jakarta.inject.Inject;
@@ -12,6 +13,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 import uce_edu_web.api.repository.modelo.Estudiante;
 import uce_edu_web.api.service.IEstudianteServi;
 
@@ -27,14 +29,27 @@ public class EstudianteController {
         return this.estudianteService.buscarPorId(id);
     }
 
+   @GET
+    @Path("")
+    @Operation(
+        summary = "consultar estudiante",
+        description = "este end point permite registrar un nuevo estudiante"
+    )
+    public List<Estudiante> buscarPorgenero(@QueryParam("genero") String genero, @QueryParam("provincia") String provincia) {
+        System.out.println(provincia);
+        return this.estudianteService.buscarPorGenero(genero);
+    }
+
     @GET
     @Path("")
+    @Operation(summary = "summary",description = "description")
     public List<Estudiante> consultarTodos() {
         return this.estudianteService.buscarTodos();
     }
 
     @POST
     @Path("")
+    @Operation(summary = "Guardar Estudiante",description = "Guarda un nuevo estudiante en el sistema")
     public void guardarEstudiante(@RequestBody Estudiante estudiante) {
         this.estudianteService.guardar(estudiante);
     }

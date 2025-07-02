@@ -6,7 +6,7 @@ import uce_edu_web.api.repository.modelo.Estudiante;
 
 public interface IEstudianteRepo {
 
-public Estudiante seleccionarPorId(Integer id);
+public Estudiante seleccionarPorId(String genero);
 public List<Estudiante> seleccionarTodos();
 public Estudiante insertar(Estudiante estudiante);
 public void actualizarPorId(Estudiante estudiante);

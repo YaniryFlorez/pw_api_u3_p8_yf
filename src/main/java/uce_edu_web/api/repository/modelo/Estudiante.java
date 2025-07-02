@@ -7,14 +7,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "estudiante")
 public class Estudiante {
+   @Id
+    @GeneratedValue(generator = "seq_est", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "seq_est", sequenceName = "seq_est", allocationSize = 1)
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "estu_id")
     private Integer id;
     @Column(name = "estu_nombre")
@@ -23,6 +25,9 @@ public class Estudiante {
     private String apellido;
     @Column(name = "estu_fecha_nacimiento")
     private LocalDateTime fechaNacimiento;
+    @Column(name = "estu_genero")
+    private String genero;
+
 
   // Getters and Setters
 
@@ -50,11 +55,18 @@ public class Estudiante {
     public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+    public String getGenero() {
+        return genero;
+    }
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
     @Override
     public String toString() {
         return "Estudiante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
-                + fechaNacimiento + "]";
+                + fechaNacimiento + ", genero=" + genero + "]";
     }
+  
 
 
 }

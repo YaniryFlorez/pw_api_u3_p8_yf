@@ -17,6 +17,7 @@ public class EstudianteServiImpl implements IEstudianteServi {
     public Estudiante buscarPorId(Integer id) {
         return this.estudianteRepo.seleccionarPorId(id);
     }
+    
 
     @Override
     public List<Estudiante> buscarTodos() {
@@ -41,6 +42,13 @@ public class EstudianteServiImpl implements IEstudianteServi {
     @Override
     public void actualizarParcial(Estudiante estudiante) {
        this.estudianteRepo.actualizarParcial(estudiante);
+    }
+
+
+    @Override
+    public List<Estudiante> buscarPorGenero(String genero) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buscarPorGenero'");
     }
 
 
