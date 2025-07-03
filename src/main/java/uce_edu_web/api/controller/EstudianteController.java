@@ -29,22 +29,15 @@ public class EstudianteController {
         return this.estudianteService.buscarPorId(id);
     }
 
-   @GET
+      @GET
     @Path("")
     @Operation(
         summary = "consultar estudiante",
         description = "este end point permite registrar un nuevo estudiante"
     )
-    public List<Estudiante> buscarPorgenero(@QueryParam("genero") String genero, @QueryParam("provincia") String provincia) {
+    public List<Estudiante> consultarTodos(@QueryParam("genero") String genero, @QueryParam("provincia") String provincia) {
         System.out.println(provincia);
-        return this.estudianteService.buscarPorGenero(genero);
-    }
-
-    @GET
-    @Path("")
-    @Operation(summary = "summary",description = "description")
-    public List<Estudiante> consultarTodos() {
-        return this.estudianteService.buscarTodos();
+        return this.estudianteService.buscarTodos(genero);
     }
 
     @POST

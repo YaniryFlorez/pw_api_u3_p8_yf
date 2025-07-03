@@ -20,8 +20,8 @@ public class EstudianteServiImpl implements IEstudianteServi {
     
 
     @Override
-    public List<Estudiante> buscarTodos() {
-        return this.estudianteRepo.seleccionarTodos();
+    public List<Estudiante> buscarTodos(String genero) {
+        return this.estudianteRepo.seleccionarTodos(genero);
     }
 
     @Override
@@ -44,12 +44,6 @@ public class EstudianteServiImpl implements IEstudianteServi {
        this.estudianteRepo.actualizarParcial(estudiante);
     }
 
-
-    @Override
-    public List<Estudiante> buscarPorGenero(String genero) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPorGenero'");
-    }
 
 
 
