@@ -24,6 +24,11 @@ public class ProfesorServiImpl implements IProfesorServi {
     }
 
     @Override
+    public List<Profesor> buscarPorGenero(String genero) {
+        return this.profesorRepo.seleccionarPorGenero(genero);
+    }
+
+    @Override
     public Profesor guardar(Profesor profesor) {
         return this.profesorRepo.insertar(profesor);
     }

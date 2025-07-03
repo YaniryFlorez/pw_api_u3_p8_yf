@@ -21,6 +21,8 @@ public class Profesor {
     private String nombre;
     @Column(name = "prof_apellido")
     private String apellido;
+    @Column(name = "prof_genero")
+    private String genero;
     @Column(name = "prof_materia")
     private String materia;
      @Column(name = "prof_fecha_contrato")
@@ -51,6 +53,12 @@ public class Profesor {
         this.apellido = apellido;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
     public String getMateria() {
         return materia;
     }
@@ -69,8 +77,10 @@ public class Profesor {
 
     @Override
     public String toString() {
-        return "Profesor [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", materia=" + materia
-                + ", fechaContrato=" + fechaContrato + "]";
+        return "Profesor [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", genero=" + genero
+                + ", materia=" + materia + ", fechaContrato=" + fechaContrato + "]";
     }
+
+   
 
 }

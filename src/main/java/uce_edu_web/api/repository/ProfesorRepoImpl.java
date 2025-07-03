@@ -26,6 +26,12 @@ public class ProfesorRepoImpl implements IProfesorRepo {
         TypedQuery<Profesor> myquery = this.entityManager.createQuery("SELECT p FROM Profesor p", Profesor.class);
         return myquery.getResultList();
     }
+      @Override
+    public List<Profesor> seleccionarPorGenero(String genero) {
+  TypedQuery<Profesor> myQuery = this.entityManager.createQuery("SELECT p FROM Profesor p WHERE p.genero =:genero", Profesor.class);
+        myQuery.setParameter("genero", genero);
+        return myQuery.getResultList(); 
+    }
 
     @Override
     public Profesor insertar(Profesor profesor) {
@@ -51,5 +57,7 @@ public class ProfesorRepoImpl implements IProfesorRepo {
     public void actualizarParcial(Profesor profesor) {
         this.entityManager.merge(profesor);
     }
+
+  
 
 }
