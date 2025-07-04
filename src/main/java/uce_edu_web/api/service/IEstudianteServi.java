@@ -2,11 +2,13 @@ package uce_edu_web.api.service;
 
 import java.util.List;
 
+import jakarta.ws.rs.core.UriInfo;
 import uce_edu_web.api.repository.modelo.Estudiante;
+import uce_edu_web.api.service.To.EstudianteTo;
 
 public interface IEstudianteServi {
 
-public  Estudiante buscarPorId(Integer id);
+public  EstudianteTo buscarPorId(Integer id,UriInfo uriInfo);
 public List<Estudiante> buscarTodos(String genero);
 public Estudiante guardar(Estudiante estudiante);
 public void actualizarPorId(Estudiante estudiante);

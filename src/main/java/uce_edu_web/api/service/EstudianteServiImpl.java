@@ -4,8 +4,10 @@ import java.util.List;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.UriInfo;
 import uce_edu_web.api.repository.IEstudianteRepo;
 import uce_edu_web.api.repository.modelo.Estudiante;
+import uce_edu_web.api.service.To.EstudianteTo;
 
 @ApplicationScoped
 public class EstudianteServiImpl implements IEstudianteServi {
@@ -14,10 +16,11 @@ public class EstudianteServiImpl implements IEstudianteServi {
     private IEstudianteRepo estudianteRepo;
 
     @Override
-    public Estudiante buscarPorId(Integer id) {
-        return this.estudianteRepo.seleccionarPorId(id);
+    public EstudianteTo buscarPorId(Integer id, UriInfo uriInfo) {
+        Estudiante e1 = this.estudianteRepo.seleccionarPorId(id);
+        EstudianteTo e = new EstudianteTo(e1.getId(), e1.getNombre(), e1.getApellido(),e1.getFechaNacimiento(), e1.getGenero(), uriInfo);
+        return e;
     }
-    
 
     @Override
     public List<Estudiante> buscarTodos(String genero) {
@@ -31,7 +34,7 @@ public class EstudianteServiImpl implements IEstudianteServi {
 
     @Override
     public void actualizarPorId(Estudiante estudiante) {
-         this.estudianteRepo.actualizarPorId(estudiante);
+        this.estudianteRepo.actualizarPorId(estudiante);
     }
 
     @Override
@@ -41,10 +44,7 @@ public class EstudianteServiImpl implements IEstudianteServi {
 
     @Override
     public void actualizarParcial(Estudiante estudiante) {
-       this.estudianteRepo.actualizarParcial(estudiante);
+        this.estudianteRepo.actualizarParcial(estudiante);
     }
-
-
-
 
 }
