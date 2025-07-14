@@ -4,10 +4,8 @@ import java.util.List;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.UriInfo;
 import uce_edu_web.api.repository.IEstudianteRepo;
 import uce_edu_web.api.repository.modelo.Estudiante;
-import uce_edu_web.api.service.To.EstudianteTo;
 
 @ApplicationScoped
 public class EstudianteServiImpl implements IEstudianteServi {
