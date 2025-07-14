@@ -18,4 +18,9 @@ public class HijoServiImpl implements IHijoServi {
         return this.hijoRepo.buscarPorEstudianteId(id);
     }
 
+    @Override
+    public List<Hijo> buscarPorProfesorId(Integer id) {
+        return this.hijoRepo.buscarPorProfesorId(id);
+    }
+
 }

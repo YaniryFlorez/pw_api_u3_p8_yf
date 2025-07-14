@@ -28,6 +28,11 @@ public class Hijo {
     @JoinColumn(name = "hijo_estudiante")
     private Estudiante estudiante;
 
+     @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hijo_profesor")
+    private Profesor profesor;
+
     public Integer getId() {
         return id;
     }

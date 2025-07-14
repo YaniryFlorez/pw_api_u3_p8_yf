@@ -26,7 +26,9 @@ public void set_links(Map<String, String> _links) {
 
     public void buildURI(UriInfo uriInfo) {
       URI todosHijos = uriInfo.getBaseUriBuilder()
-                .path(EstudianteController.class).path(EstudianteController.class, "obtenerHijosPorId").build(id);
+                .path(EstudianteController.class).
+                path(EstudianteController.class,
+                 "obtenerHijosPorId").build(id);
 
         _links.put("hijos", todosHijos.toString());
     }

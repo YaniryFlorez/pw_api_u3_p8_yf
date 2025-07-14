@@ -6,4 +6,8 @@ import uce_edu_web.api.repository.modelo.Hijo;
 
 public interface HijoRepo {
  public List<Hijo> buscarPorEstudianteId(Integer id);
+
+ public List<Hijo> buscarPorProfesorId(Integer id);
 }
+
+

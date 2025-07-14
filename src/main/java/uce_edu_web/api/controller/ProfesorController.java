@@ -23,29 +23,42 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import uce_edu_web.api.repository.modelo.Hijo;
 import uce_edu_web.api.repository.modelo.Profesor;
+import uce_edu_web.api.service.IHijoServi;
 import uce_edu_web.api.service.IProfesorServi;
 import uce_edu_web.api.service.To.ProfesorTo;
+import uce_edu_web.api.service.To.mapper.ProfesorMapper;
 
 @Path("/profesores")
- @Consumes(MediaType.APPLICATION_JSON) // ← Esto acepta JSON
-@Produces(MediaType.APPLICATION_JSON)
+
 public class ProfesorController {
 
     @Inject
     private IProfesorServi profesorService;
 
+    @Inject
+    private IHijoServi hijoService;
+
     @GET
     @Path("/{id}")
-    public Response consultarPorId(@PathParam("id") Integer id,@Context UriInfo uriInfo) {
-        ProfesorTo profe = this.profesorService.buscarPorId(id, uriInfo);
+    @Consumes(MediaType.APPLICATION_JSON) // ← Esto acepta JSON
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response consultarPorId(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
+        ProfesorTo profe = ProfesorMapper.toTo(this.profesorService.buscarPorId(id));
+        profe.buildURI(uriInfo);
         return Response.status(Response.Status.OK).entity(profe).build();
     }
 
     @GET
     @Path("/todos")
-    @Operation(summary = "consultar Profesor", description = "este end point permite buscar todos los Profesores")
-    public Response consultarTodos() {
-        return Response.status(Response.Status.OK).entity(this.profesorService.buscarTodos()).build();
+    @Operation(summary = "Consultar profesores", description = "Este endpoint permite consultar todos los profesores, filtrando por género y provincia si se desea")
+    public Response consultarProfesores(@QueryParam("genero") String genero,
+            @QueryParam("provincia") String provincia) {
+        System.out.println(provincia);
+        List<ProfesorTo> lista = this.profesorService.buscarPorGenero(genero)
+                .stream()
+                .map(ProfesorMapper::toTo)
+                .toList();
+        return Response.status(Response.Status.OK).entity(lista).build();
     }
 
     @GET
@@ -59,17 +72,18 @@ public class ProfesorController {
 
     @POST
     @Path("")
+    @Operation(summary = "Guardar Profesor", description = "Guarda un nuevo profesor en el sistema")
     public Response guardarProfesor(@RequestBody Profesor profesor) {
         this.profesorService.guardar(profesor);
         return Response.status(Response.Status.CREATED).entity(profesor).build();
     }
-/* 
+
     @PUT
     @Path("/{id}")
     @Operation(summary = "Actualizar Profesor", description = "Actualiza por completo los datos de un Profesor según su ID")
     public Response actualizarPorId(@PathParam("id") Integer id, @RequestBody Profesor profesor) {
         profesor.setId(id);
-        this.profesorService.actualizar(this.profesorService.buscarPorId(id));
+        this.profesorService.actualizar(profesor);
         return Response.status(Response.Status.OK).entity(profesor).build();
     }
 
@@ -77,23 +91,26 @@ public class ProfesorController {
     @Path("/{id}")
     @Operation(summary = "Actualizar Parcial Profesor", description = "Actualiza parcialmente los datos de un Profesor según su ID")
     public Response actualizarParcialProfesor(@PathParam("id") Integer id, @RequestBody Profesor profesor) {
-        profesor.setId(id);
-        Profesor p = this.profesorService.buscarPorId(id);
-        if (profesor.getNombre() != null) {
-            p.setNombre(profesor.getNombre());
-        }
-        if (profesor.getApellido() != null) {
-            p.setApellido(profesor.getApellido());
-        }
-        if (profesor.getFechaContrato() != null) {
-            p.setFechaContrato(profesor.getFechaContrato());
-        }
-        if (profesor.getMateria() != null) {
-            p.setMateria(profesor.getMateria());
+        Profesor existente = this.profesorService.buscarPorId(id);
+        if (existente == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Profesor no encontrado").build();
         }
 
-        this.profesorService.actualizarParcial(p);
-        return Response.status(Response.Status.OK).entity(p).build();
+        if (profesor.getNombre() != null) {
+            existente.setNombre(profesor.getNombre());
+        }
+        if (profesor.getApellido() != null) {
+            existente.setApellido(profesor.getApellido());
+        }
+        if (profesor.getFechaContrato() != null) {
+            existente.setFechaContrato(profesor.getFechaContrato());
+        }
+        if (profesor.getMateria() != null) {
+            existente.setMateria(profesor.getMateria());
+        }
+
+        this.profesorService.actualizarParcial(existente);
+        return Response.status(Response.Status.OK).entity(existente).build();
     }
 
     @DELETE
@@ -103,18 +120,13 @@ public class ProfesorController {
         this.profesorService.borrarPorId(id);
         return Response.status(Response.Status.OK).build();
     }
-*/
-  @GET
-    @Path("/{id}/hijos")
-    public List<Hijo> obtenerHijosPorId(@PathParam("id") Integer id) {
-        Hijo h1 = new Hijo();
-        h1.setNombre("Pepito");
-        Hijo h2 = new Hijo();
-        h2.setNombre("Juanito");
-        List<Hijo> hijos = new ArrayList<>();
-        hijos.add(h1);
-        hijos.add(h2);
 
-        return hijos;
+    @GET
+    @Path("/{id}/hijos")
+    @Operation(summary = "Obtener Hijos de Profesor", description = "Devuelve la lista ficticia de hijos asociada a un profesor")
+    public List<Hijo> obtenerHijosPorId(@PathParam("id") Integer id) {
+       
+        return this.hijoService.buscarPorProfesorId(id);
     }
+
 }

@@ -8,7 +8,6 @@ import java.util.Map;
 import jakarta.ws.rs.core.UriInfo;
 import uce_edu_web.api.controller.ProfesorController;
 
-
 public class ProfesorTo {
     private Integer id;
     private String nombre;
@@ -16,22 +15,22 @@ public class ProfesorTo {
     private String genero;
     private String materia;
     private LocalDateTime fechaContrato;
-    private Map<String, String> _links = new HashMap<>();
+ private Map<String, String> _links = new HashMap<>();
 
-    public ProfesorTo(Integer id, String nombre, String apellido, String genero, String materia, LocalDateTime fechaContrato, UriInfo uriInfo) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.genero = genero;
-        this.materia = materia;
-        this.fechaContrato = fechaContrato;
+    public Map<String, String> get_links() {
+        return _links;
+    }
+public void set_links(Map<String, String> _links) {
+        this._links = _links;
+    }
+    public void buildURI(UriInfo uriInfo) {
         URI todosHijos = uriInfo.getBaseUriBuilder()
                 .path(ProfesorController.class)
-                .path(ProfesorController.class, "obtenerHijosPorId")
-                .build(id);
+                .path(ProfesorController.class,
+                 "obtenerHijosPorId").build(id);
         _links.put("hijos", todosHijos.toString());
     }
-
+    // Getters and Setters
     public Integer getId() {
         return id;
     }
@@ -79,6 +78,5 @@ public class ProfesorTo {
     public void setFechaContrato(LocalDateTime fechaContrato) {
         this.fechaContrato = fechaContrato;
     }
-
 
 }
