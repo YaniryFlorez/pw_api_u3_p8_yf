@@ -2,9 +2,13 @@ package uce_edu_web.api.controller;
 
 import java.util.List;
 
+import org.eclipse.microprofile.jwt.Claim;
+import org.eclipse.microprofile.jwt.ClaimValue;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -33,6 +37,13 @@ import uce_edu_web.api.service.To.mapper.EstudianteMapper;
 public class EstudianteController {
 
     @Inject
+    JsonWebToken jwt;
+
+    @Inject
+    @Claim("sub")
+    ClaimValue<String> subject;
+
+    @Inject
     private IEstudianteServi estudianteService;
 
     @Inject
@@ -40,6 +51,7 @@ public class EstudianteController {
 
    @GET
     @Path("/{id}")
+    @RolesAllowed("admin")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response consultarPorId(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
